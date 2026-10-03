@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
 import { Volume2, Square, Sparkles, AlertCircle, ArrowRight } from 'lucide-react';
-import { GAME_QUESTIONS, SCRAMBLED_QUESTION_LETTERS } from '../data/questions';
+import { GAME_QUESTIONS, TARGET_SECRET_LETTERS } from '../data/questions';
 import { UserAnswerRecord } from '../types/game';
 import { sound } from '../services/soundEngine';
 import { voice } from '../services/voiceEngine';
@@ -30,7 +30,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   onFinish12Questions
 }) => {
   const currentQ = GAME_QUESTIONS[questionIndex];
-  const assignedLetter = SCRAMBLED_QUESTION_LETTERS[questionIndex];
+  const assignedLetter = TARGET_SECRET_LETTERS[questionIndex];
   const currentQuestionNumber = questionIndex + 1;
   const progressPercent = Math.round((currentQuestionNumber / 12) * 100);
 
@@ -220,45 +220,6 @@ export const GameScreen: React.FC<GameScreenProps> = ({
             className="h-full bg-gradient-to-r from-pink-500 via-rose-400 to-amber-300 rounded-full transition-all duration-300 shadow-sm"
             style={{ width: `${progressPercent}%` }}
           />
-        </div>
-      </div>
-
-      {/* Mini Scrambled Secret Letters Shelf */}
-      <div className="w-full bg-slate-900/90 border border-pink-900/70 rounded-2xl p-2.5 sm:p-3 mb-3.5 shadow-md">
-        <div className="flex items-center justify-between text-xs text-pink-300 font-bold mb-2 px-1">
-          <span className="flex items-center gap-1.5">
-            <span>🗝️</span> Mảnh ghép mật mã thu thập (Được xáo trộn ngẫu nhiên):
-          </span>
-          <span className="text-[11px] text-amber-300 font-extrabold">
-            Đã mở: {correctAnswersCount}/12
-          </span>
-        </div>
-        <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5 sm:gap-2">
-          {SCRAMBLED_QUESTION_LETTERS.map((letter, idx) => {
-            const record = userAnswers.find(a => a.globalIndex === idx);
-            const isCurrent = idx === questionIndex;
-            const isUnlocked = record?.isCorrect;
-
-            return (
-              <div
-                key={idx}
-                className={`h-9 sm:h-10 rounded-xl flex flex-col items-center justify-center font-black text-xs sm:text-sm border transition-all select-none ${
-                  isUnlocked
-                    ? 'bg-gradient-to-b from-pink-500 to-rose-600 border-pink-200 text-white shadow-md shadow-pink-500/30 scale-100'
-                    : isCurrent
-                    ? 'bg-amber-950/60 border-amber-400 text-amber-300 ring-2 ring-amber-400/50 animate-pulse'
-                    : 'bg-slate-950/60 border-slate-800 text-slate-500'
-                }`}
-                title={`Câu ${idx + 1}: ${isUnlocked ? `Chữ cái '${letter}'` : isCurrent ? 'Đang giải' : 'Chưa mở'}`}
-              >
-                {isUnlocked ? (
-                  <span>{letter}</span>
-                ) : (
-                  <span className="text-[10px] font-bold opacity-60">#{idx + 1}</span>
-                )}
-              </div>
-            );
-          })}
         </div>
       </div>
 

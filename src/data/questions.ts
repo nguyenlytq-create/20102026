@@ -4,9 +4,6 @@ export const TARGET_SECRET_LETTERS = ['P', 'H', 'U', 'N', 'U', 'V', 'I', 'E', 'T
 
 export const SECRET_WORD = TARGET_SECRET_LETTERS.join(''); // "PHUNUVIETNAM"
 
-// Thứ tự chữ cái trao thưởng cho 12 câu hỏi được xáo trộn ngẫu nhiên để học sinh không đoán sớm được từ khóa
-export const SCRAMBLED_QUESTION_LETTERS = ['T', 'N', 'U', 'M', 'V', 'A', 'H', 'I', 'N', 'E', 'U', 'P'] as const;
-
 export const GAME_QUESTIONS: Question[] = [
   {
     id: 1,
