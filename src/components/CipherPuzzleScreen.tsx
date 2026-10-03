@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Sparkles, RotateCcw, Lightbulb, Unlock, X, Key, CheckCircle2, Lock } from 'lucide-react';
-import { TARGET_SECRET_LETTERS, SECRET_WORD } from '../data/questions';
+import { TARGET_SECRET_LETTERS, SECRET_WORD, SCRAMBLED_QUESTION_LETTERS } from '../data/questions';
 import { UserAnswerRecord } from '../types/game';
 import { sound } from '../services/soundEngine';
 
@@ -21,9 +21,9 @@ export const CipherPuzzleScreen: React.FC<CipherPuzzleScreenProps> = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [draggedLetter, setDraggedLetter] = useState<string | null>(null);
 
-  // Status for each of the 12 questions (index 0..11)
+  // Status for each of the 12 questions (index 0..11) - hiển thị theo thứ tự xáo trộn thực tế
   const questionStatus = useMemo(() => {
-    return TARGET_SECRET_LETTERS.map((letter, idx) => {
+    return SCRAMBLED_QUESTION_LETTERS.map((letter, idx) => {
       const record = userAnswers.find(a => a.globalIndex === idx);
       const isUnlocked = record ? record.isCorrect : false;
       return {
@@ -247,8 +247,9 @@ export const CipherPuzzleScreen: React.FC<CipherPuzzleScreenProps> = ({
                 return (
                   <div
                     key={q.questionNum}
-                    className="p-1.5 rounded-xl bg-gradient-to-b from-pink-900 via-rose-900 to-purple-950 border border-amber-400 text-center shadow-md flex flex-col items-center justify-center animate-fadeIn"
-                    title={`Câu ${q.questionNum}: Đã mở thành công chữ cái ${q.letter}`}
+                    onClick={() => handleTileClick(q.letter)}
+                    className="p-1.5 rounded-xl bg-gradient-to-b from-pink-900 via-rose-900 to-purple-950 border border-amber-400 text-center shadow-md flex flex-col items-center justify-center animate-fadeIn cursor-pointer hover:scale-105 active:scale-95 transition-transform"
+                    title={`Câu ${q.questionNum}: Đã mở chữ cái ${q.letter} (Bấm để điền vào ô trống)`}
                   >
                     <span className="text-[9px] text-amber-300 font-bold block leading-none mb-0.5">
                       Câu {q.questionNum}
