@@ -111,8 +111,14 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           colors: ['#ec4899', '#f472b6', '#fbbf24', '#f43f5e']
         });
       } catch {}
+      setTimeout(() => {
+        voice.playFeedbackAudio(currentQuestionNumber, true);
+      }, 350);
     } else {
       sound.playWrong();
+      setTimeout(() => {
+        voice.playFeedbackAudio(currentQuestionNumber, false);
+      }, 350);
     }
   };
 
@@ -125,6 +131,14 @@ export const GameScreen: React.FC<GameScreenProps> = ({
       onFinish12Questions(); // Trigger next
     } else {
       onFinish12Questions();
+    }
+  };
+
+  const handleReplayFeedback = () => {
+    if (isSpeaking) {
+      voice.cancel();
+    } else {
+      voice.playFeedbackAudio(currentQuestionNumber, Boolean(isSelectedCorrect));
     }
   };
 
@@ -307,11 +321,21 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                     {assignedLetter}
                   </div>
                   <div>
-                    <div className="text-xs sm:text-sm font-extrabold uppercase text-amber-300 tracking-wider flex items-center gap-1.5">
-                      <Sparkles className="w-4 h-4 text-amber-300" />
-                      🎉 CHÍNH XÁC! (+10 ĐIỂM)
+                    <div className="flex items-center gap-2">
+                      <div className="text-xs sm:text-sm font-extrabold uppercase text-amber-300 tracking-wider flex items-center gap-1.5">
+                        <Sparkles className="w-4 h-4 text-amber-300" />
+                        🎉 CHÍNH XÁC! (+10 ĐIỂM)
+                      </div>
+                      <button
+                        onClick={handleReplayFeedback}
+                        className="px-2 py-0.5 rounded-lg bg-pink-900/80 hover:bg-pink-800 border border-pink-500/50 text-[11px] font-bold text-pink-200 hover:text-white flex items-center gap-1 cursor-pointer transition"
+                        title={isSpeaking ? 'Dừng đọc' : 'Nghe lại thuyết minh'}
+                      >
+                        <Volume2 className={`w-3 h-3 ${isSpeaking ? 'animate-pulse text-amber-300' : ''}`} />
+                        <span>{isSpeaking ? 'Dừng' : 'Nghe lại'}</span>
+                      </button>
                     </div>
-                    <h4 className="text-sm sm:text-base font-black text-white font-display">
+                    <h4 className="text-sm sm:text-base font-black text-white font-display mt-0.5">
                       Thu thập được 1 Chữ cái Chìa Khóa Yêu Thương:{' '}
                       <span className="text-amber-300">{assignedLetter}</span>!
                     </h4>
@@ -335,8 +359,18 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                 <div className="flex items-center gap-3">
                   <AlertCircle className="w-8 h-8 text-amber-400 shrink-0" />
                   <div>
-                    <div className="text-sm sm:text-base font-black font-display text-amber-300">
-                      CHƯA CHÍNH XÁC!
+                    <div className="flex items-center gap-2">
+                      <div className="text-sm sm:text-base font-black font-display text-amber-300">
+                        CHƯA CHÍNH XÁC!
+                      </div>
+                      <button
+                        onClick={handleReplayFeedback}
+                        className="px-2 py-0.5 rounded-lg bg-rose-900/80 hover:bg-rose-800 border border-rose-500/50 text-[11px] font-bold text-rose-200 hover:text-white flex items-center gap-1 cursor-pointer transition"
+                        title={isSpeaking ? 'Dừng đọc' : 'Nghe lại giải thích gợi ý'}
+                      >
+                        <Volume2 className={`w-3 h-3 ${isSpeaking ? 'animate-pulse text-amber-300' : ''}`} />
+                        <span>{isSpeaking ? 'Dừng' : 'Nghe lại'}</span>
+                      </button>
                     </div>
                     <div className="text-xs sm:text-sm text-slate-200 mt-1 leading-relaxed">
                       Gợi ý: {currentQ.hint}

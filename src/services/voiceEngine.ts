@@ -88,6 +88,19 @@ class VoiceEngine {
     this.playAudioSource(audioSrc);
   }
 
+  /**
+   * Phát thuyết minh kết quả trả lời sau khi học sinh chọn đáp án
+   * Giọng nữ chuẩn miền Bắc Hà Nội, phát ngay lập tức 0ms
+   */
+  public playFeedbackAudio(questionNum: number, isCorrect: boolean) {
+    if (!this.enabled) return;
+    this.cancel();
+
+    const audioKey = isCorrect ? `feedback_correct_${questionNum}` : `feedback_wrong_${questionNum}`;
+    const audioSrc = AUDIO_EMBEDDED[audioKey] || `/audio/${audioKey}.mp3`;
+    this.playAudioSource(audioSrc);
+  }
+
   private playAudioSource(src: string) {
     try {
       this.notifyState(true);
