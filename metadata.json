@@ -1,0 +1,6 @@
+{
+  "name": "Mật Mã Yêu Thương - Toán 6",
+  "description": "Đấu trường Toán 6: Chinh phục số nguyên tố, giải mã mật thư bí mật chúc mừng 20/10 với giọng đọc AI sinh động.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
