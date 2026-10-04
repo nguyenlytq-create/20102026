@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import { Volume2, Square, Sparkles, AlertCircle, ArrowRight } from 'lucide-react';
+import { Volume2, Sparkles, AlertCircle, ArrowRight } from 'lucide-react';
 import { GAME_QUESTIONS, AWARDED_LETTERS } from '../data/questions';
 import { UserAnswerRecord } from '../types/game';
 import { sound } from '../services/soundEngine';
@@ -47,22 +47,12 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     }));
   }, [currentQ]);
 
-  // Reset states and auto-read question when arriving at each question
+  // Reset states on question change
   useEffect(() => {
     setIsLocked(false);
     setSelectedIndex(null);
     voice.cancel();
-
-    // Auto-read question clearly: "Câu 1. ...", "Câu 2. ...", etc.
-    const timer = setTimeout(() => {
-      voice.playQuestionAudio(currentQuestionNumber);
-    }, 450);
-
-    return () => {
-      clearTimeout(timer);
-      voice.cancel();
-    };
-  }, [questionIndex, currentQuestionNumber]);
+  }, [questionIndex]);
 
   // Listen to voice engine state changes
   useEffect(() => {
@@ -74,15 +64,6 @@ export const GameScreen: React.FC<GameScreenProps> = ({
       voice.cancel();
     };
   }, []);
-
-  const handleReadQuestion = () => {
-    sound.playClick();
-    voice.playQuestionAudio(currentQuestionNumber);
-  };
-
-  const handleStopVoice = () => {
-    voice.cancel();
-  };
 
   const handleSelectOption = (idx: number) => {
     if (isLocked) return;
@@ -240,32 +221,9 @@ export const GameScreen: React.FC<GameScreenProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            {/* Voice Action Buttons */}
-            <button
-              onClick={handleReadQuestion}
-              className={`px-2.5 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition shadow-sm cursor-pointer ${
-                isSpeaking
-                  ? 'bg-pink-500 text-white ring-2 ring-pink-300 border-pink-300'
-                  : 'bg-pink-900/80 hover:bg-pink-800 border-pink-600 text-pink-200 hover:text-white'
-              }`}
-              title="Nghe cô giáo AI đọc câu hỏi và các đáp án"
-            >
-              <Volume2 className={`w-3.5 h-3.5 ${isSpeaking ? 'animate-pulse' : ''}`} />
-              <span className="hidden sm:inline">Nghe đọc</span>
-            </button>
-            <button
-              onClick={handleStopVoice}
-              className="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-600 text-slate-300 hover:text-white text-xs font-bold flex items-center justify-center transition shadow-sm cursor-pointer"
-              title="Dừng giọng đọc"
-            >
-              <Square className="w-3.5 h-3.5 fill-current" />
-            </button>
-
-            <span className="text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full bg-pink-950 border border-pink-500/40 text-pink-200 shadow-sm">
-              {currentQ.categoryTag}
-            </span>
-          </div>
+          <span className="text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full bg-pink-950 border border-pink-500/40 text-pink-200 shadow-sm shrink-0">
+            {currentQ.categoryTag}
+          </span>
         </div>
 
         {/* Question Text with prominent Question Number Badge */}

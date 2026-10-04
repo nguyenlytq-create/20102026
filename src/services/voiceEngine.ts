@@ -62,18 +62,11 @@ class VoiceEngine {
   }
 
   /**
-   * Phát âm thanh câu hỏi (Câu 1 đến Câu 9)
-   * Sử dụng file âm thanh giọng nữ miền Bắc Hà Nội được lưu sẵn trong code
-   * Phát NGAY LẬP TỨC 0ms không phải chờ
+   * Phần câu hỏi không đọc âm thanh (theo yêu cầu)
    */
-  public playQuestionAudio(questionNum: number) {
-    if (!this.enabled) return;
-    this.cancel();
-
-    const audioKey = `q${questionNum}`;
-    const audioSrc = AUDIO_EMBEDDED[audioKey] || `/audio/${audioKey}.mp3`;
-
-    this.playAudioSource(audioSrc);
+  public playQuestionAudio(_questionNum: number) {
+    // Disabled per user request: "Phần câu hỏi không đọc nhé, bỏ âm thanh đi"
+    return;
   }
 
   /**
