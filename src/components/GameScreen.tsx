@@ -12,7 +12,7 @@ interface GameScreenProps {
   setTotalScore: React.Dispatch<React.SetStateAction<number>>;
   userAnswers: UserAnswerRecord[];
   setUserAnswers: React.Dispatch<React.SetStateAction<UserAnswerRecord[]>>;
-  onFinish12Questions: () => void;
+  onAdvanceQuestion: () => void;
 }
 
 interface OptionObj {
@@ -27,7 +27,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   setTotalScore,
   userAnswers,
   setUserAnswers,
-  onFinish12Questions
+  onAdvanceQuestion
 }) => {
   const currentQ = GAME_QUESTIONS[questionIndex];
   const assignedLetter = AWARDED_LETTERS[questionIndex];
@@ -47,12 +47,22 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     }));
   }, [currentQ]);
 
-  // Reset states on question change
+  // Reset states and auto-read question when arriving at each question
   useEffect(() => {
     setIsLocked(false);
     setSelectedIndex(null);
     voice.cancel();
-  }, [questionIndex]);
+
+    // Auto-read question clearly: "Câu 1. ...", "Câu 2. ...", etc.
+    const timer = setTimeout(() => {
+      voice.playQuestionAudio(currentQuestionNumber);
+    }, 450);
+
+    return () => {
+      clearTimeout(timer);
+      voice.cancel();
+    };
+  }, [questionIndex, currentQuestionNumber]);
 
   // Listen to voice engine state changes
   useEffect(() => {
@@ -127,7 +137,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     sound.stopAll();
     sound.playChestOpen();
 
-    onFinish12Questions(); // Advance question or complete
+    onAdvanceQuestion(); // Advance question or complete
   };
 
   const handleReplayFeedback = () => {
@@ -165,7 +175,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
               <span className="text-pink-400 font-black text-sm sm:text-base">
                 {currentQuestionNumber}
               </span>
-              /12
+              /{GAME_QUESTIONS.length}
             </div>
           </div>
         </div>
@@ -188,15 +198,15 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           {/* Letters collected pill */}
           <div
             className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-pink-950/90 border border-pink-700/60 flex items-center gap-1 shadow-sm"
-            title="Số chữ cái mật mã đã thu thập"
+            title="Số ký tự mật mã đã thu thập"
           >
             <span className="text-base sm:text-lg">🔤</span>
             <div>
               <div className="text-[9px] sm:text-[10px] text-pink-300 uppercase leading-none font-bold">
-                Chữ cái
+                Ký tự
               </div>
               <div className="text-sm sm:text-lg font-black text-pink-300 leading-tight">
-                {correctAnswersCount}/12
+                {correctAnswersCount}/{GAME_QUESTIONS.length}
               </div>
             </div>
           </div>
@@ -208,7 +218,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         <div className="flex justify-between items-center text-xs sm:text-sm text-pink-300 font-bold mb-1.5 px-1">
           <span>Tiến độ thử thách</span>
           <span className="text-pink-300">
-            Câu {currentQuestionNumber}/12 ({progressPercent}%)
+            Câu {currentQuestionNumber}/{GAME_QUESTIONS.length} ({progressPercent}%)
           </span>
         </div>
         <div className="w-full h-3 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-pink-900/80">
@@ -258,8 +268,13 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           </div>
         </div>
 
-        {/* Question Text */}
-        <div className="min-h-[75px] sm:min-h-[90px] flex items-center justify-center text-center my-2 sm:my-4 px-2 sm:px-6">
+        {/* Question Text with prominent Question Number Badge */}
+        <div className="min-h-[85px] sm:min-h-[105px] flex flex-col items-center justify-center text-center my-2 sm:my-4 px-2 sm:px-6">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-pink-600 via-rose-500 to-amber-500 border border-amber-300 text-white font-black text-xs sm:text-sm uppercase tracking-wider mb-2.5 shadow-md shadow-pink-600/40">
+            <span>✨</span>
+            <span>CÂU {currentQuestionNumber}</span>
+            <span>✨</span>
+          </div>
           <h3 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white leading-relaxed font-display">
             {currentQ.text}
           </h3>

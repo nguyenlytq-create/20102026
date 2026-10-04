@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
               MẬT MÃ YÊU THƯƠNG
             </h1>
             <p className="text-[10px] sm:text-xs text-pink-300/80 hidden sm:block font-medium truncate">
-              Toán 6 • Bài 10: Số nguyên tố (12 Thử Thách • Giải Mã Mật Thư)
+              Toán 6 • Bài 10: Số nguyên tố (9 Thử Thách • Giải Mã Mật Thư)
             </p>
           </div>
         </div>

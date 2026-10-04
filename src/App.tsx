@@ -85,7 +85,7 @@ export default function App() {
             setTotalScore={setTotalScore}
             userAnswers={userAnswers}
             setUserAnswers={setUserAnswers}
-            onFinish12Questions={handleFinishQuestionOrAdvance}
+            onAdvanceQuestion={handleFinishQuestionOrAdvance}
           />
         )}
 

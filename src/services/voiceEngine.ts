@@ -62,7 +62,7 @@ class VoiceEngine {
   }
 
   /**
-   * Phát âm thanh câu hỏi (Câu 1 đến Câu 12)
+   * Phát âm thanh câu hỏi (Câu 1 đến Câu 9)
    * Sử dụng file âm thanh giọng nữ miền Bắc Hà Nội được lưu sẵn trong code
    * Phát NGAY LẬP TỨC 0ms không phải chờ
    */
@@ -145,7 +145,7 @@ class VoiceEngine {
     const match = text.match(/Câu hỏi số (\d+)|Câu hỏi (\d+)/);
     if (match) {
       const qNum = parseInt(match[1] || match[2], 10);
-      if (qNum >= 1 && qNum <= 12) {
+      if (qNum >= 1 && qNum <= 9) {
         this.playQuestionAudio(qNum);
         return;
       }
