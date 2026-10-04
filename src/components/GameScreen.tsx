@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
 import { Volume2, Square, Sparkles, AlertCircle, ArrowRight } from 'lucide-react';
-import { GAME_QUESTIONS, TARGET_SECRET_LETTERS } from '../data/questions';
+import { GAME_QUESTIONS, AWARDED_LETTERS } from '../data/questions';
 import { UserAnswerRecord } from '../types/game';
 import { sound } from '../services/soundEngine';
 import { voice } from '../services/voiceEngine';
@@ -30,9 +30,9 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   onFinish12Questions
 }) => {
   const currentQ = GAME_QUESTIONS[questionIndex];
-  const assignedLetter = TARGET_SECRET_LETTERS[questionIndex];
+  const assignedLetter = AWARDED_LETTERS[questionIndex];
   const currentQuestionNumber = questionIndex + 1;
-  const progressPercent = Math.round((currentQuestionNumber / 12) * 100);
+  const progressPercent = Math.round((currentQuestionNumber / GAME_QUESTIONS.length) * 100);
 
   const [isLocked, setIsLocked] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -127,11 +127,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     sound.stopAll();
     sound.playChestOpen();
 
-    if (questionIndex < 11) {
-      onFinish12Questions(); // Trigger next
-    } else {
-      onFinish12Questions();
-    }
+    onFinish12Questions(); // Advance question or complete
   };
 
   const handleReplayFeedback = () => {
@@ -336,12 +332,12 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                       </button>
                     </div>
                     <h4 className="text-sm sm:text-base font-black text-white font-display mt-0.5">
-                      Thu thập được 1 Chữ cái Chìa Khóa Yêu Thương:{' '}
-                      <span className="text-amber-300">{assignedLetter}</span>!
+                      Thu thập được 1 Mảnh ghép Yêu Thương:{' '}
+                      <span className="text-amber-300 font-mono text-lg">{assignedLetter}</span>!
                     </h4>
                     <p className="text-xs text-pink-200/90 mt-0.5">
-                      {questionIndex >= 11
-                        ? 'Em đã hoàn thành trọn vẹn 12 câu hỏi!'
+                      {questionIndex >= GAME_QUESTIONS.length - 1
+                        ? 'Em đã hoàn thành trọn vẹn 9 câu hỏi!'
                         : 'Hãy bấm tiếp tục để giải các thử thách tiếp theo.'}
                     </p>
                   </div>
@@ -350,7 +346,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                   onClick={handleNext}
                   className="btn-3d w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-black text-sm uppercase shadow-lg shadow-pink-500/40 whitespace-nowrap cursor-pointer flex items-center justify-center gap-2"
                 >
-                  {questionIndex >= 11 ? 'TIẾN VÀO GIẢI MÃ MẬT THƯ 💌' : 'Tiếp tục câu sau'}
+                  {questionIndex >= GAME_QUESTIONS.length - 1 ? 'TIẾN VÀO GIẢI MÃ MẬT THƯ 💌' : 'Tiếp tục câu sau'}
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -381,7 +377,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                   onClick={handleNext}
                   className="btn-3d w-full sm:w-auto mt-2 sm:mt-0 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-black text-xs sm:text-sm uppercase whitespace-nowrap border border-slate-600 cursor-pointer flex items-center justify-center gap-2"
                 >
-                  {questionIndex >= 11 ? 'TIẾN VÀO GIẢI MÃ MẬT THƯ' : 'Tiếp tục'}
+                  {questionIndex >= GAME_QUESTIONS.length - 1 ? 'TIẾN VÀO GIẢI MÃ MẬT THƯ' : 'Tiếp tục'}
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

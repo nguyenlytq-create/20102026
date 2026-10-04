@@ -19,10 +19,10 @@ export const CelebrationScreen: React.FC<CelebrationScreenProps> = ({
   onGoHome
 }) => {
   const correctCount = userAnswers.filter(a => a.isCorrect).length;
-  const accuracy = Math.round((correctCount / 12) * 100);
+  const accuracy = Math.round((correctCount / (userAnswers.length || 9)) * 100);
 
   const celebrationText =
-    'Tuyệt vời! Chúc mừng các em đã giải mã thành công Mật Mã Yêu Thương: Phụ Nữ Việt Nam! Kính chúc các Cô giáo, các Mẹ và tất cả các bạn nữ luôn luôn xinh đẹp, ngập tràn niềm vui, hạnh phúc và luôn là những đóa hoa rạng rỡ nhất!';
+    'Tuyệt vời! Chúc mừng các em đã giải mã thành công Mật Mã Yêu Thương: 20 Tháng 10! Kính chúc các Cô giáo, các Mẹ và tất cả các bạn nữ luôn luôn xinh đẹp, ngập tràn niềm vui, hạnh phúc và luôn là những đóa hoa rạng rỡ nhất!';
 
   const triggerConfetti = () => {
     try {
@@ -92,7 +92,7 @@ export const CelebrationScreen: React.FC<CelebrationScreenProps> = ({
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-black font-love tracking-wider text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.7)] uppercase title-vietnamese">
-            PHỤ NỮ VIỆT NAM
+            20 THÁNG 10
           </h1>
 
           <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-amber-200 mt-2 font-display drop-shadow-[0_3px_10px_rgba(234,179,8,0.7)] title-vietnamese">
@@ -110,7 +110,7 @@ export const CelebrationScreen: React.FC<CelebrationScreenProps> = ({
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-5 max-w-3xl mx-auto">
           <div className="p-3 rounded-2xl bg-white/15 border border-white/30 text-center">
             <span className="text-xs text-pink-200 block font-semibold">Tổng câu</span>
-            <span className="text-xl sm:text-2xl font-black text-white">12/12</span>
+            <span className="text-xl sm:text-2xl font-black text-white">9/9</span>
           </div>
           <div className="p-3 rounded-2xl bg-white/15 border border-white/30 text-center">
             <span className="text-xs text-pink-200 block font-semibold">Tỷ lệ chính xác</span>
@@ -121,8 +121,8 @@ export const CelebrationScreen: React.FC<CelebrationScreenProps> = ({
             <span className="text-xl sm:text-2xl font-black text-yellow-300">{totalScore}</span>
           </div>
           <div className="p-3 rounded-2xl bg-white/15 border border-white/30 text-center">
-            <span className="text-xs text-pink-200 block font-semibold">Chìa khóa tình yêu</span>
-            <span className="text-xl sm:text-2xl font-black text-white">{correctCount}/12 🗝️</span>
+            <span className="text-xs text-pink-200 block font-semibold">Mảnh ghép mở được</span>
+            <span className="text-xl sm:text-2xl font-black text-white">{correctCount}/9 🗝️</span>
           </div>
         </div>
 

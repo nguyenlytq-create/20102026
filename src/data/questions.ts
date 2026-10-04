@@ -1,8 +1,13 @@
 import { Question } from '../types/game';
 
-export const TARGET_SECRET_LETTERS = ['P', 'H', 'U', 'N', 'U', 'V', 'I', 'E', 'T', 'N', 'A', 'M'] as const;
+// Thứ tự các ký tự trao thưởng ngẫu nhiên theo yêu cầu: "21TNAHG00"
+// Câu 1 -> 2, Câu 2 -> 1, Câu 3 -> T, Câu 4 -> N, Câu 5 -> A, Câu 6 -> H, Câu 7 -> G, Câu 8 -> 0, Câu 9 -> 0
+export const AWARDED_LETTERS = ['2', '1', 'T', 'N', 'A', 'H', 'G', '0', '0'] as const;
 
-export const SECRET_WORD = TARGET_SECRET_LETTERS.join(''); // "PHUNUVIETNAM"
+// Từ khóa bí mật đích khi giải mã ở vòng cuối cùng: "20THANG10" (20 THÁNG 10)
+export const TARGET_SECRET_LETTERS = ['2', '0', 'T', 'H', 'A', 'N', 'G', '1', '0'] as const;
+
+export const SECRET_WORD = TARGET_SECRET_LETTERS.join(''); // "20THANG10"
 
 export const GAME_QUESTIONS: Question[] = [
   {
@@ -89,43 +94,11 @@ export const GAME_QUESTIONS: Question[] = [
   },
   {
     id: 9,
-    topic: "Chọn số nguyên tố trong các số cho trước",
-    categoryTag: "Nhận biết số nguyên tố",
-    text: "Trong các số: 21, 23, 27, 33, số nào là số nguyên tố?",
-    options: ["21", "23", "27", "33"],
-    correctIndex: 1,
-    hint: "21 chia hết cho 3, 27 chia hết cho 3, 33 chia hết cho 3. Chỉ có 23 là số nguyên tố."
-  },
-  {
-    id: 10,
-    topic: "Tính chất số chẵn lớn hơn 2",
-    categoryTag: "Tính chất số chẵn",
-    text: "Trong các số: 2, 5, 7, 2017, 2018, số nào chắc chắn là hợp số do là số chẵn lớn hơn 2?",
-    options: ["2", "5", "2017", "2018"],
-    correctIndex: 3,
-    hint: "Mọi số chẵn lớn hơn 2 đều có ít nhất ba ước là 1, 2 và chính nó nên chắc chắn là hợp số."
-  },
-  {
-    id: 11,
     topic: "Số nguyên tố chẵn duy nhất",
     categoryTag: "Số nguyên tố đặc biệt",
     text: "Số nguyên tố chẵn duy nhất là:",
     options: ["0", "1", "2", "4"],
     correctIndex: 2,
     hint: "Số 2 là số nguyên tố nhỏ nhất và cũng là số nguyên tố chẵn duy nhất."
-  },
-  {
-    id: 12,
-    topic: "Nhận biết khẳng định đúng về số nguyên tố",
-    categoryTag: "Số nguyên tố đặc biệt",
-    text: "Khẳng định nào sau đây là đúng?",
-    options: [
-      "Mọi số lẻ đều là số nguyên tố",
-      "Mọi số chẵn đều là hợp số",
-      "Số 2 là số nguyên tố",
-      "Số 1 là số nguyên tố"
-    ],
-    correctIndex: 2,
-    hint: "Số 2 có đúng hai ước là 1 và 2 nên 2 là số nguyên tố."
   }
 ];

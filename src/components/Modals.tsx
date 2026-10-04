@@ -130,31 +130,31 @@ export const GuideModal: React.FC<GuideModalProps> = ({ isOpen, onClose }) => {
             <h3 className="text-base sm:text-lg font-black text-pink-300 font-display uppercase">
               Luật Chơi: Mật Mã Yêu Thương
             </h3>
-            <p className="text-xs text-pink-200">12 câu hỏi Toán 6 & Giải mã bức mật thư bí mật</p>
+            <p className="text-xs text-pink-200">9 câu hỏi Toán 6 & Giải mã bức mật thư bí mật</p>
           </div>
         </div>
 
         <div className="space-y-3 text-xs sm:text-sm text-slate-200 max-h-[60vh] overflow-y-auto pr-2">
           <div className="p-3 rounded-xl bg-pink-950/60 border border-pink-800/50">
             <b className="text-pink-300 block mb-1">🗺️ Cấu trúc Hành Trình:</b>
-            <p>• Vượt qua <b>12 câu hỏi thử thách Toán 6</b> về Số nguyên tố.</p>
-            <p>• Mỗi câu trả lời đúng sẽ giúp em thu thập thêm 1 Chìa khóa chữ cái bí ẩn (+10 điểm).</p>
+            <p>• Vượt qua <b>9 câu hỏi thử thách Toán 6</b> về Số nguyên tố & Hợp số.</p>
+            <p>• Mỗi câu trả lời đúng sẽ giúp em thu thập thêm 1 Mảnh ghép ký tự bí ẩn (+10 điểm).</p>
           </div>
 
           <div className="p-3 rounded-xl bg-pink-950/60 border border-pink-800/50">
-            <b className="text-amber-400 block mb-1">💌 Thu thập Chữ cái Mật mã:</b>
+            <b className="text-amber-400 block mb-1">💌 Thu thập Ký tự Mật mã:</b>
             <p>
-              • Mỗi câu trả lời đúng sẽ mở ra <b>1 chữ cái vàng</b> trong dãy 12 ký tự bí mật.
+              • Mỗi câu trả lời đúng sẽ mở ra <b>1 ký tự vàng (chữ hoặc số)</b> trong chuỗi 9 ký tự bí mật.
             </p>
             <p>
-              • Sau 12 câu, em sẽ tiến vào màn hình <b>Chìa Khóa Yêu Thương</b> để tự tay kéo thả hoặc gõ phím ghép các chữ cái thành thông điệp ý nghĩa nhất!
+              • Sau 9 câu, em sẽ tiến vào màn hình <b>Giải Mã Mật Mã Yêu Thương</b> để sắp xếp các ký tự thành thông điệp chào mừng ngày 20/10!
             </p>
           </div>
 
           <div className="p-3 rounded-xl bg-pink-950/60 border border-pink-800/50">
             <b className="text-rose-400 block mb-1">✨ Bức Mật Thư Bí Mật:</b>
             <p>
-              Khi hoàn thành đúng mật mã, điều bất ngờ đặc biệt chúc mừng ngày Phụ Nữ Việt Nam 20/10 sẽ được khai mở với hiệu ứng hoa hồng kỳ diệu và pháo hoa rực rỡ!
+              Khi giải mã chính xác mật mã <b>"20 THÁNG 10"</b>, điều bất ngờ đặc biệt chúc mừng ngày Phụ Nữ Việt Nam sẽ được khai mở với hiệu ứng pháo hoa và cánh hoa hồng tuyệt đẹp!
             </p>
           </div>
         </div>

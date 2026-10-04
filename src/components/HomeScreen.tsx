@@ -27,7 +27,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onStartGame, onOpenGuide
 
       {/* Subtitle */}
       <p className="text-sm sm:text-base text-pink-200/90 font-medium mb-5 max-w-xl px-2 leading-relaxed">
-        “Vượt qua 12 thử thách toán học – Thu thập 12 mảnh ghép bí ẩn – Mở khóa bức mật thư chứa đựng điều bất ngờ đặc biệt ở cuối hành trình!”
+        “Vượt qua 9 thử thách toán học – Thu thập 9 mảnh ghép bí ẩn – Mở khóa bức mật thư chứa đựng điều bất ngờ đặc biệt ở cuối hành trình!”
       </p>
 
       {/* Center Card Illustration */}
@@ -41,7 +41,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onStartGame, onOpenGuide
             <span className="text-3xl">📝</span>
             <div className="text-left">
               <div className="text-[11px] text-pink-300 font-bold uppercase tracking-wider">
-                12 Thử Thách Toán 6
+                9 Thử Thách Toán 6
               </div>
               <div className="text-sm sm:text-base font-black text-slate-100">
                 Số Nguyên Tố & Hợp Số
@@ -52,7 +52,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onStartGame, onOpenGuide
             <span className="text-3xl">🗝️</span>
             <div className="text-left">
               <div className="text-[11px] text-amber-300 font-bold uppercase tracking-wider">
-                12 Chìa Khóa Yêu Thương
+                9 Mảnh Ghép Yêu Thương
               </div>
               <div className="text-sm sm:text-base font-black text-amber-300">
                 Mở Khóa Mật Thư
@@ -64,7 +64,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onStartGame, onOpenGuide
         <div className="mt-3 p-3 rounded-xl bg-pink-950/50 border border-pink-700/50 text-xs sm:text-sm text-pink-200 flex items-center gap-2">
           <Heart className="w-4 h-4 text-pink-400 shrink-0 fill-pink-400" />
           <span>
-            Mỗi câu trả lời đúng sẽ giải mã được <b>1 Chữ cái bí ẩn</b> để ghép thành Mật mã yêu thương!
+            Mỗi câu trả lời đúng sẽ giải mã được <b>1 Ký tự bí ẩn (chữ hoặc số)</b> để ghép thành Mật mã yêu thương!
           </span>
         </div>
       </div>

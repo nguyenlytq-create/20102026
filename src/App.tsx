@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ScreenType, UserAnswerRecord } from './types/game';
+import { GAME_QUESTIONS } from './data/questions';
 import { Header } from './components/Header';
 import { HomeScreen } from './components/HomeScreen';
 import { GameScreen } from './components/GameScreen';
@@ -40,7 +41,7 @@ export default function App() {
   };
 
   const handleFinishQuestionOrAdvance = () => {
-    if (questionIndex < 11) {
+    if (questionIndex < GAME_QUESTIONS.length - 1) {
       setQuestionIndex(prev => prev + 1);
     } else {
       sound.playKeyEarned();
