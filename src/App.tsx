@@ -116,11 +116,6 @@ export default function App() {
         isOpen={isGuideModalOpen}
         onClose={() => setIsGuideModalOpen(false)}
       />
-
-      {/* Footer */}
-      <footer className="w-full text-center py-2.5 text-[11px] text-pink-400/80 bg-slate-950/90 border-t border-pink-950/60 relative z-10">
-        Hệ Thống Trò Chơi Toán Lớp 6 • Bài 10: Số Nguyên Tố • Hành Trình Giải Mã Bức Mật Thư Bí Mật 20/10
-      </footer>
     </div>
   );
 }
